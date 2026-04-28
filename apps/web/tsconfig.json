@@ -13,7 +13,9 @@
 			"@exec/shared": ["../../packages/shared/src"],
 			"@exec/shared/*": ["../../packages/shared/src/*"],
 			"@exec/db": ["../../packages/db/src"],
-			"@exec/db/*": ["../../packages/db/src/*"]
+			"@exec/db/*": ["../../packages/db/src/*"],
+			"@exec/jobs": ["../../packages/jobs/src"],
+			"@exec/jobs/*": ["../../packages/jobs/src/*"]
 		},
 		"noEmit": true,
 		"incremental": true,

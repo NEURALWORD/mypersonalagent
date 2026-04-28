@@ -15,7 +15,7 @@
 - [x] **F-006** Setup Next.js app skeleton (App Router, Tailwind, shadcn) — see `tasks/F-006.md` (2026-04-28; Lighthouse FCP measurement deferred to workstation)
 - [x] **F-007** Setup Clerk auth (email + Google + passkey) — see `tasks/F-007.md` (2026-04-28; mock-mode fallback per ADR-020; real-key smoke test deferred to staging)
 - [x] **F-008** Setup tRPC v11 server + client — see `tasks/F-008.md` (2026-04-28)
-- [ ] **F-009** Setup Inngest dev server + first cron — see `tasks/F-009.md`
+- [x] **F-009** Setup Inngest dev server + first cron — see `tasks/F-009.md` (2026-04-28; mock-mode fallback per ADR-020; live `inngest-cli dev` smoke test deferred to workstation)
 - [ ] **F-010** Setup Langfuse + Sentry + PostHog — see `tasks/F-010.md`
 
 ## Phase 1 — Memory layer (week 3)
