@@ -75,7 +75,18 @@
 	},
 	"overrides": [
 		{
-			"includes": ["**/*.config.{js,ts,mjs,cjs}", "**/next.config.*", "**/turbo.json"],
+			"includes": [
+				"**/*.config.{js,ts,mjs,cjs}",
+				"**/next.config.*",
+				"**/turbo.json",
+				"**/app/**/page.tsx",
+				"**/app/**/layout.tsx",
+				"**/app/**/loading.tsx",
+				"**/app/**/error.tsx",
+				"**/app/**/not-found.tsx",
+				"**/app/**/template.tsx",
+				"**/middleware.{ts,tsx}"
+			],
 			"linter": {
 				"rules": {
 					"style": {

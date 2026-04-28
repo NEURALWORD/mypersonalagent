@@ -1,9 +1,31 @@
 {
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
-		"rootDir": "./src",
-		"outDir": "./dist"
+		"jsx": "preserve",
+		"plugins": [
+			{
+				"name": "next"
+			}
+		],
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"],
+			"@exec/shared": ["../../packages/shared/src"],
+			"@exec/shared/*": ["../../packages/shared/src/*"],
+			"@exec/db": ["../../packages/db/src"],
+			"@exec/db/*": ["../../packages/db/src/*"]
+		},
+		"noEmit": true,
+		"incremental": true,
+		"types": ["node"],
+		"allowJs": true
 	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules", "dist", ".turbo"]
+	"include": [
+		"next-env.d.ts",
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"next.config.mjs",
+		".next/types/**/*.ts"
+	],
+	"exclude": ["node_modules", ".next", "dist"]
 }

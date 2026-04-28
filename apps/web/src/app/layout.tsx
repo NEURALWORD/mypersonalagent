@@ -1,0 +1,19 @@
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
+import { ThemeProvider } from '@/components/theme-provider';
+import './globals.css';
+
+export const metadata: Metadata = {
+	title: 'Executive Agent',
+	description: 'Your AI Chief of Staff — memory-first, voice-native, predictive, privacy-first.',
+};
+
+const RootLayout = ({ children }: { children: ReactNode }) => (
+	<html lang="en" suppressHydrationWarning>
+		<body>
+			<ThemeProvider>{children}</ThemeProvider>
+		</body>
+	</html>
+);
+
+export default RootLayout;
