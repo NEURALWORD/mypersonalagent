@@ -181,3 +181,49 @@ Wellbeing signals are **structurally excluded** from any cross-user aggregation:
 - Pro: builds trust for the most sensitive layer
 - Con: loses potentially valuable training signal for wisdom layer
 - Acceptable: trust > data utility on this dimension
+
+---
+
+## ADR-015 — Phase-aware quality gate — 2026-04-28
+
+**Context**: `claude.md` originally specified `pnpm gate` = typecheck + lint + test + eval, but the eval harness itself ships in Phase 2 (task AI-004). A literal reading would block every Phase 0 / Phase 1 task because `pnpm eval:relevant` does not exist yet.
+**Decision**: `pnpm gate` is phase-aware:
+- Phase 0 (Foundations): typecheck + lint + test
+- Phase 1 (Memory): + eval:unit
+- Phase 2+ (after AI-004 lands): + eval:integration
+The implementation is `pnpm typecheck && pnpm lint && pnpm test` at root for now; the eval steps are appended in the same commit that lands AI-004.
+**Alternatives considered**: stub a no-op `pnpm eval` from day 1 (hides regressions later); hard-block Phase 0 tasks until evals exist (deadlock).
+**Consequences**: explicit table in `claude.md` and `LOOP.md` so future sessions don't read the original "always eval" rule as absolute. One source of drift to keep in sync as phases ship.
+**Status**: accepted
+
+## ADR-016 — Phase-0 commits to working setup branch (not per-task PR) — 2026-04-28
+
+**Context**: `claude.md` mandates `feat/<task-id>-<slug>` + PR for every task. During Phase 0 (F-001..F-010) the repo has no users, no integrations, no secrets in flight, and the branch protection benefit is purely audit-trail.
+**Decision**: Phase 0 commits directly to the working setup branch (`claude/avvia-setup-w4m0N`). From Phase 1 (M-001) onward, the standard `feat/` + PR discipline is mandatory.
+**Alternatives considered**: open 10 trivial PRs for F-001..F-010 (10× ceremony, no review value); skip the per-task PR rule globally (loses real protection once integrations land).
+**Consequences**: scoped, reversible exception. Documented in both `claude.md` and `LOOP.md`. Risk is small because the Phase-0 commits are pure scaffolding with green gates.
+**Status**: accepted (auto-expires when M-001 starts)
+
+## ADR-017 — Workspace packages consume TypeScript sources directly — 2026-04-28
+
+**Context**: A workspace package can be consumed via either built `dist/*.js` artefacts or its raw `src/*.ts` sources. With Vercel AI SDK + Next.js + vitest, every consumer already has a TS-aware bundler.
+**Decision**: Internal `@exec/*` packages expose `src/index.ts` directly via the `exports`/`main`/`types` fields. No build step in dev. Imports use extensionless paths (`./errors` not `./errors.ts`); TS Bundler module resolution + vitest resolver both handle this. We can add `tsup`/`tsc -b` later for any package that needs to be published externally.
+**Alternatives considered**: build to `dist/` per package (extra `pnpm build` step, slower iteration, more cache invalidation); use `.ts` extensions in imports + `allowImportingTsExtensions` (works but locks every package to `noEmit`).
+**Consequences**: zero build step for internal packages; faster CI. Any package that ever needs publishing will need a build step added. `pnpm typecheck` per package validates compilation soundness without emit.
+**Status**: accepted
+
+## ADR-018 — Env vars parsed via function, not module-load side effect — 2026-04-28
+
+**Context**: `tasks/F-004.md` snippet exports `const env = schema.parse(process.env)` at module top level. In a monorepo where `@exec/shared` is imported by typecheck tools, tests, scripts, and apps, this would explode any context where the full prod env is not present.
+**Decision**: `packages/shared/src/env.ts` exports `envSchema` and a `parseEnv(source = process.env)` function. Apps call `parseEnv()` once at boot (still "fail fast" semantics). Tests construct fixture envs and pass them to `parseEnv()` for full coverage.
+**Alternatives considered**: lazy proxy on `env` (works but obscures the failure point); separate `env.runtime.ts` with the parse and `env.schema.ts` for the schema (extra file, same outcome).
+**Consequences**: importing `@exec/shared` is safe in any context. Apps must explicitly call `parseEnv()` at startup — a small, testable line of code rather than an invisible side effect.
+**Status**: accepted
+
+## ADR-019 — pnpm 10 (not 9) as the project package manager — 2026-04-28
+
+**Context**: `RUNBOOK.md` and the F-001 spec call for pnpm 9.x. Node 22's Corepack ships pnpm 10.x.
+**Decision**: Pin `packageManager: "pnpm@10.33.0"` in root `package.json`. Update `RUNBOOK.md` to reflect pnpm 10 when next touched.
+**Alternatives considered**: install pnpm 9 globally (fights Corepack); drop the version pin (drift across machines).
+**Consequences**: workspace lockfile uses pnpm 10 format. Marginal compat risk for any tool that hard-codes pnpm 9 — none known today. Future devs get the pinned version automatically via Corepack.
+**Status**: accepted
