@@ -29,6 +29,9 @@ importers:
       '@clerk/nextjs':
         specifier: ^7.2.7
         version: 7.2.7(next@15.5.15(@opentelemetry/api@1.9.1)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@exec/ai':
+        specifier: workspace:*
+        version: link:../../packages/ai
       '@exec/db':
         specifier: workspace:*
         version: link:../../packages/db
@@ -126,6 +129,25 @@ importers:
       tailwindcss:
         specifier: ^4.0.0
         version: 4.2.4
+      typescript:
+        specifier: '*'
+        version: 5.9.3
+      vitest:
+        specifier: '*'
+        version: 4.1.5(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(happy-dom@16.8.1)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/ai:
+    dependencies:
+      '@exec/shared':
+        specifier: workspace:*
+        version: link:../shared
+      zod:
+        specifier: ^3.24.1
+        version: 3.25.76
+    devDependencies:
+      '@types/node':
+        specifier: '*'
+        version: 25.6.0
       typescript:
         specifier: '*'
         version: 5.9.3

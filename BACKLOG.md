@@ -16,7 +16,7 @@
 - [x] **F-007** Setup Clerk auth (email + Google + passkey) — see `tasks/F-007.md` (2026-04-28; mock-mode fallback per ADR-020; real-key smoke test deferred to staging)
 - [x] **F-008** Setup tRPC v11 server + client — see `tasks/F-008.md` (2026-04-28)
 - [x] **F-009** Setup Inngest dev server + first cron — see `tasks/F-009.md` (2026-04-28; mock-mode fallback per ADR-020; live `inngest-cli dev` smoke test deferred to workstation)
-- [ ] **F-010** Setup Langfuse + Sentry + PostHog — see `tasks/F-010.md`
+- [x] **F-010** Setup Langfuse + Sentry + PostHog — see `tasks/F-010.md` (2026-04-28; API surface + mock implementations per ADR-020; real SDK init lands with AI-001)
 
 ## Phase 1 — Memory layer (week 3)
 

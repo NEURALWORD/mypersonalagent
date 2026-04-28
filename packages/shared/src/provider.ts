@@ -40,13 +40,14 @@ export const buildProvider = <TReal, TMock>(
 
 /**
  * Helper for the common case where mocks should log to stdout in dev and
- * be silent in test/prod. `console.warn` is used because biome's noConsole
- * rule allows it.
+ * be silent in test. NODE_ENV is read at call time (not at construction)
+ * so vitest's `vi.stubEnv` works as expected. `console.warn` is used
+ * because biome's noConsole rule allows it.
  */
 export const mockLogger = (provider: string): ((event: string, data?: unknown) => void) => {
-	if (process.env.NODE_ENV === 'test') return () => undefined;
 	const prefix = `[mock:${provider}]`;
 	return (event: string, data?: unknown) => {
+		if (process.env.NODE_ENV === 'test') return;
 		if (data === undefined) {
 			console.warn(prefix, event);
 		} else {

@@ -12,6 +12,7 @@
 	},
 	"dependencies": {
 		"@clerk/nextjs": "^7.2.7",
+		"@exec/ai": "workspace:*",
 		"@exec/db": "workspace:*",
 		"@exec/jobs": "workspace:*",
 		"@exec/shared": "workspace:*",

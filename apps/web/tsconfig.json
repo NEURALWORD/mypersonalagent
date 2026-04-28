@@ -15,7 +15,9 @@
 			"@exec/db": ["../../packages/db/src"],
 			"@exec/db/*": ["../../packages/db/src/*"],
 			"@exec/jobs": ["../../packages/jobs/src"],
-			"@exec/jobs/*": ["../../packages/jobs/src/*"]
+			"@exec/jobs/*": ["../../packages/jobs/src/*"],
+			"@exec/ai": ["../../packages/ai/src"],
+			"@exec/ai/*": ["../../packages/ai/src/*"]
 		},
 		"noEmit": true,
 		"incremental": true,
