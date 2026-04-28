@@ -9,7 +9,7 @@
 
 - [x] **F-001** Initialize monorepo (Turborepo + pnpm + Biome) — see `tasks/F-001.md` (2026-04-28)
 - [x] **F-002** Setup Docker compose (Postgres 16 + pgvector + Redis) — see `tasks/F-002.md` (2026-04-28; runtime smoke test pending — no docker daemon in sandbox)
-- [ ] **F-003** Configure TypeScript strict + path aliases — see `tasks/F-003.md`
+- [x] **F-003** Configure TypeScript strict + path aliases — see `tasks/F-003.md` (2026-04-28)
 - [ ] **F-004** Create `packages/shared` (errors, types, env validation) — see `tasks/F-004.md`
 - [ ] **F-005** Create `packages/db` (Drizzle, base schema, migrations) — see `tasks/F-005.md`
 - [ ] **F-006** Setup Next.js app skeleton (App Router, Tailwind, shadcn) — see `tasks/F-006.md`
