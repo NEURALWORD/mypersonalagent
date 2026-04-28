@@ -1,18 +1,18 @@
 {
-  "name": "voice-latency-baseline",
-  "version": 1,
-  "description": "Latency budgets for voice always-on. Regression eval fails if any p95 exceeds baseline by > 10%.",
-  "metrics": {
-    "stt_first_chunk_ms_p50": 280,
-    "stt_first_chunk_ms_p95": 500,
-    "router_decision_ms_p50": 80,
-    "router_decision_ms_p95": 180,
-    "llm_first_token_ms_p50": 350,
-    "llm_first_token_ms_p95": 700,
-    "tts_first_audio_ms_p50": 220,
-    "tts_first_audio_ms_p95": 450,
-    "end_to_end_first_audio_ms_p50": 850,
-    "end_to_end_first_audio_ms_p95": 1500
-  },
-  "alert_threshold_pct": 10
+	"name": "voice-latency-baseline",
+	"version": 1,
+	"description": "Latency budgets for voice always-on. Regression eval fails if any p95 exceeds baseline by > 10%.",
+	"metrics": {
+		"stt_first_chunk_ms_p50": 280,
+		"stt_first_chunk_ms_p95": 500,
+		"router_decision_ms_p50": 80,
+		"router_decision_ms_p95": 180,
+		"llm_first_token_ms_p50": 350,
+		"llm_first_token_ms_p95": 700,
+		"tts_first_audio_ms_p50": 220,
+		"tts_first_audio_ms_p95": 450,
+		"end_to_end_first_audio_ms_p50": 850,
+		"end_to_end_first_audio_ms_p95": 1500
+	},
+	"alert_threshold_pct": 10
 }

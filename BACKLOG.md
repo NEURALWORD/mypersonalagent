@@ -7,7 +7,7 @@
 
 ## Phase 0 — Foundations (week 1-2)
 
-- [ ] **F-001** Initialize monorepo (Turborepo + pnpm + Biome) — see `tasks/F-001.md`
+- [x] **F-001** Initialize monorepo (Turborepo + pnpm + Biome) — see `tasks/F-001.md` (2026-04-28)
 - [ ] **F-002** Setup Docker compose (Postgres 16 + pgvector + Redis) — see `tasks/F-002.md`
 - [ ] **F-003** Configure TypeScript strict + path aliases — see `tasks/F-003.md`
 - [ ] **F-004** Create `packages/shared` (errors, types, env validation) — see `tasks/F-004.md`

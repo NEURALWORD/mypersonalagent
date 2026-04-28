@@ -1,54 +1,54 @@
 {
-  "name": "wellbeing-classification",
-  "description": "WellbeingClassifier maps signal patterns to GREEN/YELLOW/ORANGE/RED",
-  "version": 1,
-  "examples": [
-    {
-      "id": "wb-001",
-      "signals_7d": {
-        "avg_work_hours": 9.5,
-        "late_night_emails": 1,
-        "weekend_activity": 0,
-        "meeting_hours_per_day_p75": 4.5
-      },
-      "baseline": { "avg_work_hours": 9.0, "late_night_emails": 1.5 },
-      "expected_state": "green"
-    },
-    {
-      "id": "wb-002",
-      "signals_7d": {
-        "avg_work_hours": 13,
-        "late_night_emails": 5,
-        "weekend_activity": 8,
-        "meeting_hours_per_day_p75": 7
-      },
-      "baseline": { "avg_work_hours": 9.0, "late_night_emails": 1.5 },
-      "expected_state": "orange"
-    },
-    {
-      "id": "wb-003",
-      "signals_7d": {
-        "avg_work_hours": 14.5,
-        "late_night_emails": 7,
-        "weekend_activity": 12,
-        "meeting_hours_per_day_p75": 8,
-        "consecutive_weeks_over_threshold": 4
-      },
-      "baseline": { "avg_work_hours": 9.0, "late_night_emails": 1.5 },
-      "expected_state": "red"
-    },
-    {
-      "id": "wb-004",
-      "signals_7d": {
-        "avg_work_hours": 10.5,
-        "late_night_emails": 3,
-        "weekend_activity": 1,
-        "meeting_hours_per_day_p75": 5
-      },
-      "baseline": { "avg_work_hours": 9.0, "late_night_emails": 1.5 },
-      "expected_state": "yellow"
-    }
-  ],
-  "metric": "exact_match",
-  "target_score": 0.85
+	"name": "wellbeing-classification",
+	"description": "WellbeingClassifier maps signal patterns to GREEN/YELLOW/ORANGE/RED",
+	"version": 1,
+	"examples": [
+		{
+			"id": "wb-001",
+			"signals_7d": {
+				"avg_work_hours": 9.5,
+				"late_night_emails": 1,
+				"weekend_activity": 0,
+				"meeting_hours_per_day_p75": 4.5
+			},
+			"baseline": { "avg_work_hours": 9.0, "late_night_emails": 1.5 },
+			"expected_state": "green"
+		},
+		{
+			"id": "wb-002",
+			"signals_7d": {
+				"avg_work_hours": 13,
+				"late_night_emails": 5,
+				"weekend_activity": 8,
+				"meeting_hours_per_day_p75": 7
+			},
+			"baseline": { "avg_work_hours": 9.0, "late_night_emails": 1.5 },
+			"expected_state": "orange"
+		},
+		{
+			"id": "wb-003",
+			"signals_7d": {
+				"avg_work_hours": 14.5,
+				"late_night_emails": 7,
+				"weekend_activity": 12,
+				"meeting_hours_per_day_p75": 8,
+				"consecutive_weeks_over_threshold": 4
+			},
+			"baseline": { "avg_work_hours": 9.0, "late_night_emails": 1.5 },
+			"expected_state": "red"
+		},
+		{
+			"id": "wb-004",
+			"signals_7d": {
+				"avg_work_hours": 10.5,
+				"late_night_emails": 3,
+				"weekend_activity": 1,
+				"meeting_hours_per_day_p75": 5
+			},
+			"baseline": { "avg_work_hours": 9.0, "late_night_emails": 1.5 },
+			"expected_state": "yellow"
+		}
+	],
+	"metric": "exact_match",
+	"target_score": 0.85
 }

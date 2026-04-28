@@ -1,52 +1,52 @@
 {
-  "version": 1,
-  "description": "Golden dataset for memory recall evaluation. Each case represents a query with expected memory IDs and distractors.",
-  "schema": {
-    "id": "unique case id",
-    "query": "user query text",
-    "userId": "test user id",
-    "options": "RecallOptions object passed to recall()",
-    "expected": "array of memory IDs that should be in top results",
-    "distractors": "array of memory IDs that should NOT be in top 5 (semantically close but wrong)",
-    "minRecallAt5": "0.85 = at least 85% of expected must appear in top 5"
-  },
-  "cases": [
-    {
-      "id": "mr-001",
-      "query": "what does Marco like to eat",
-      "expected": ["mem_marco_pref_veg"],
-      "distractors": ["mem_anna_dinner", "mem_company_lunch"],
-      "minRecallAt5": 1.0
-    },
-    {
-      "id": "mr-002",
-      "query": "when did I last meet Anna",
-      "expected": ["mem_anna_meeting_2025_03"],
-      "distractors": ["mem_anna_email_2024", "mem_other_anna"],
-      "minRecallAt5": 1.0
-    },
-    {
-      "id": "mr-003",
-      "query": "my preferred meeting times",
-      "options": { "types": ["preference"] },
-      "expected": ["mem_pref_no_morning", "mem_pref_focus_block"],
-      "distractors": ["mem_meeting_specific"],
-      "minRecallAt5": 0.5
-    },
-    {
-      "id": "mr-004",
-      "query": "what did I decide about hiring the head of sales",
-      "expected": ["dec_head_sales_hire"],
-      "distractors": ["dec_general_hiring"],
-      "minRecallAt5": 1.0
-    },
-    {
-      "id": "mr-005",
-      "query": "TechCrunch Disrupt people I met",
-      "expected": ["mem_tcdisrupt_anna", "mem_tcdisrupt_bob"],
-      "distractors": [],
-      "minRecallAt5": 1.0
-    }
-  ],
-  "_note": "Add 195 more cases to reach the 200-case minimum. Cases should cover: (1) literal name match, (2) semantic match with no name, (3) graph expansion via entity, (4) type filtering, (5) time window filtering, (6) confidence filtering, (7) multi-hop via relationships, (8) ambiguous resolution, (9) negative cases (no match expected), (10) very recent vs very old."
+	"version": 1,
+	"description": "Golden dataset for memory recall evaluation. Each case represents a query with expected memory IDs and distractors.",
+	"schema": {
+		"id": "unique case id",
+		"query": "user query text",
+		"userId": "test user id",
+		"options": "RecallOptions object passed to recall()",
+		"expected": "array of memory IDs that should be in top results",
+		"distractors": "array of memory IDs that should NOT be in top 5 (semantically close but wrong)",
+		"minRecallAt5": "0.85 = at least 85% of expected must appear in top 5"
+	},
+	"cases": [
+		{
+			"id": "mr-001",
+			"query": "what does Marco like to eat",
+			"expected": ["mem_marco_pref_veg"],
+			"distractors": ["mem_anna_dinner", "mem_company_lunch"],
+			"minRecallAt5": 1.0
+		},
+		{
+			"id": "mr-002",
+			"query": "when did I last meet Anna",
+			"expected": ["mem_anna_meeting_2025_03"],
+			"distractors": ["mem_anna_email_2024", "mem_other_anna"],
+			"minRecallAt5": 1.0
+		},
+		{
+			"id": "mr-003",
+			"query": "my preferred meeting times",
+			"options": { "types": ["preference"] },
+			"expected": ["mem_pref_no_morning", "mem_pref_focus_block"],
+			"distractors": ["mem_meeting_specific"],
+			"minRecallAt5": 0.5
+		},
+		{
+			"id": "mr-004",
+			"query": "what did I decide about hiring the head of sales",
+			"expected": ["dec_head_sales_hire"],
+			"distractors": ["dec_general_hiring"],
+			"minRecallAt5": 1.0
+		},
+		{
+			"id": "mr-005",
+			"query": "TechCrunch Disrupt people I met",
+			"expected": ["mem_tcdisrupt_anna", "mem_tcdisrupt_bob"],
+			"distractors": [],
+			"minRecallAt5": 1.0
+		}
+	],
+	"_note": "Add 195 more cases to reach the 200-case minimum. Cases should cover: (1) literal name match, (2) semantic match with no name, (3) graph expansion via entity, (4) type filtering, (5) time window filtering, (6) confidence filtering, (7) multi-hop via relationships, (8) ambiguous resolution, (9) negative cases (no match expected), (10) very recent vs very old."
 }

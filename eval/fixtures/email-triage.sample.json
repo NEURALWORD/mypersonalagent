@@ -1,58 +1,58 @@
 {
-  "version": 1,
-  "description": "Email triage golden dataset.",
-  "cases": [
-    {
-      "id": "et-001",
-      "email": {
-        "from": "investor@vc.example",
-        "subject": "Term sheet draft - need your sign-off by EOD",
-        "body": "Hi Manuel, attached is the revised term sheet. Need your initials by end of day to keep us on track for Friday close. Let me know if any concerns. - John",
-        "date": "2026-01-15T10:00:00Z"
-      },
-      "expectedPriority": "P0",
-      "expectedCategory": "investor",
-      "expectedAction": "reply_now",
-      "expectedUrgencyHoursMax": 2
-    },
-    {
-      "id": "et-002",
-      "email": {
-        "from": "newsletter@techweekly.example",
-        "subject": "This week in AI",
-        "body": "10 articles on the latest LLM developments...",
-        "date": "2026-01-15T08:00:00Z"
-      },
-      "expectedPriority": "P3",
-      "expectedCategory": "newsletter",
-      "expectedAction": "archive",
-      "expectedUrgencyHoursMin": 168
-    },
-    {
-      "id": "et-003",
-      "email": {
-        "from": "key-customer@acme.com",
-        "subject": "Production outage on our end - your service down?",
-        "body": "We're seeing 500s when calling your API since 14:30. Is something happening? This is impacting our customers.",
-        "date": "2026-01-15T14:35:00Z"
-      },
-      "expectedPriority": "P0",
-      "expectedCategory": "customer",
-      "expectedAction": "reply_now",
-      "expectedUrgencyHoursMax": 1
-    },
-    {
-      "id": "et-004",
-      "email": {
-        "from": "team-member@yourcompany.com",
-        "subject": "Q2 OKR draft for review",
-        "body": "Drafted Q2 OKRs - would love your input by Friday. No rush before then. Here's the doc: [link]",
-        "date": "2026-01-15T11:00:00Z"
-      },
-      "expectedPriority": "P2",
-      "expectedCategory": "team",
-      "expectedAction": "schedule_reply"
-    }
-  ],
-  "_note": "Expand to 200 cases covering all priority/category combinations, edge cases (auto-replies, mass mailings, BCCs, threading), and multi-language samples."
+	"version": 1,
+	"description": "Email triage golden dataset.",
+	"cases": [
+		{
+			"id": "et-001",
+			"email": {
+				"from": "investor@vc.example",
+				"subject": "Term sheet draft - need your sign-off by EOD",
+				"body": "Hi Manuel, attached is the revised term sheet. Need your initials by end of day to keep us on track for Friday close. Let me know if any concerns. - John",
+				"date": "2026-01-15T10:00:00Z"
+			},
+			"expectedPriority": "P0",
+			"expectedCategory": "investor",
+			"expectedAction": "reply_now",
+			"expectedUrgencyHoursMax": 2
+		},
+		{
+			"id": "et-002",
+			"email": {
+				"from": "newsletter@techweekly.example",
+				"subject": "This week in AI",
+				"body": "10 articles on the latest LLM developments...",
+				"date": "2026-01-15T08:00:00Z"
+			},
+			"expectedPriority": "P3",
+			"expectedCategory": "newsletter",
+			"expectedAction": "archive",
+			"expectedUrgencyHoursMin": 168
+		},
+		{
+			"id": "et-003",
+			"email": {
+				"from": "key-customer@acme.com",
+				"subject": "Production outage on our end - your service down?",
+				"body": "We're seeing 500s when calling your API since 14:30. Is something happening? This is impacting our customers.",
+				"date": "2026-01-15T14:35:00Z"
+			},
+			"expectedPriority": "P0",
+			"expectedCategory": "customer",
+			"expectedAction": "reply_now",
+			"expectedUrgencyHoursMax": 1
+		},
+		{
+			"id": "et-004",
+			"email": {
+				"from": "team-member@yourcompany.com",
+				"subject": "Q2 OKR draft for review",
+				"body": "Drafted Q2 OKRs - would love your input by Friday. No rush before then. Here's the doc: [link]",
+				"date": "2026-01-15T11:00:00Z"
+			},
+			"expectedPriority": "P2",
+			"expectedCategory": "team",
+			"expectedAction": "schedule_reply"
+		}
+	],
+	"_note": "Expand to 200 cases covering all priority/category combinations, edge cases (auto-replies, mass mailings, BCCs, threading), and multi-language samples."
 }

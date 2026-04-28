@@ -1,20 +1,20 @@
 {
-  "name": "cost-per-active-user-monthly",
-  "version": 1,
-  "description": "Average AI inference cost per active paying user per month. Regression eval fails if exceeds baseline by > 15%.",
-  "metrics": {
-    "avg_cost_usd_per_active_user_per_month": 32.0,
-    "p95_cost_usd_per_active_user_per_month": 78.0,
-    "components": {
-      "memory_recall_pct": 8,
-      "email_triage_pct": 22,
-      "meeting_prep_pct": 14,
-      "live_meeting_pct": 35,
-      "voice_pct": 12,
-      "proactive_engine_pct": 6,
-      "other_pct": 3
-    }
-  },
-  "alert_threshold_pct": 15,
-  "hard_cap_usd_per_user_per_day": 5.0
+	"name": "cost-per-active-user-monthly",
+	"version": 1,
+	"description": "Average AI inference cost per active paying user per month. Regression eval fails if exceeds baseline by > 15%.",
+	"metrics": {
+		"avg_cost_usd_per_active_user_per_month": 32.0,
+		"p95_cost_usd_per_active_user_per_month": 78.0,
+		"components": {
+			"memory_recall_pct": 8,
+			"email_triage_pct": 22,
+			"meeting_prep_pct": 14,
+			"live_meeting_pct": 35,
+			"voice_pct": 12,
+			"proactive_engine_pct": 6,
+			"other_pct": 3
+		}
+	},
+	"alert_threshold_pct": 15,
+	"hard_cap_usd_per_user_per_day": 5.0
 }
