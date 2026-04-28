@@ -1,0 +1,49 @@
+{
+  "name": "decision-detection",
+  "description": "Should the master orchestrator open a decision file from this user message?",
+  "version": 1,
+  "examples": [
+    {
+      "id": "dd-001",
+      "user_message": "I'm trying to decide between offering Sarah the VP Eng role or doing an external search.",
+      "expected": { "open_decision": true, "stakes": "high", "options_count": 2 }
+    },
+    {
+      "id": "dd-002",
+      "user_message": "Reschedule my 3pm.",
+      "expected": { "open_decision": false }
+    },
+    {
+      "id": "dd-003",
+      "user_message": "Should I take this board seat at Acme? Pros and cons are tricky.",
+      "expected": { "open_decision": true, "stakes": "high", "options_count": 2 }
+    },
+    {
+      "id": "dd-004",
+      "user_message": "What time is my flight on Tuesday?",
+      "expected": { "open_decision": false }
+    },
+    {
+      "id": "dd-005",
+      "user_message": "Trying to figure out if we should raise now or wait six months.",
+      "expected": { "open_decision": true, "stakes": "high" }
+    },
+    {
+      "id": "dd-006",
+      "user_message": "Pizza or sushi for dinner?",
+      "expected": { "open_decision": false }
+    },
+    {
+      "id": "dd-007",
+      "user_message": "I keep going back and forth on whether to fire David.",
+      "expected": { "open_decision": true, "stakes": "high" }
+    },
+    {
+      "id": "dd-008",
+      "user_message": "Send the deck to Anna.",
+      "expected": { "open_decision": false }
+    }
+  ],
+  "metric": "exact_match_on_open_decision",
+  "target_score": 0.90
+}

@@ -1,0 +1,57 @@
+{
+  "name": "meeting-roi-scoring",
+  "description": "ROIScorer should classify meetings as low/medium/high ROI given context.",
+  "version": 1,
+  "examples": [
+    {
+      "id": "roi-001",
+      "event": {
+        "title": "Quick sync",
+        "agenda": null,
+        "attendees_count": 8,
+        "user_role": "founder",
+        "is_recurring": true,
+        "past_outcomes": "0 of last 3 produced action items"
+      },
+      "expected_score": "low"
+    },
+    {
+      "id": "roi-002",
+      "event": {
+        "title": "Series A term sheet review with Sequoia partner",
+        "agenda": "review terms, address red lines, sign by Friday",
+        "attendees_count": 3,
+        "user_role": "founder",
+        "is_recurring": false,
+        "past_outcomes": "n/a"
+      },
+      "expected_score": "high"
+    },
+    {
+      "id": "roi-003",
+      "event": {
+        "title": "All-hands status update",
+        "agenda": "updates from each team",
+        "attendees_count": 25,
+        "user_role": "founder",
+        "is_recurring": true,
+        "past_outcomes": "info-only, no decisions"
+      },
+      "expected_score": "low"
+    },
+    {
+      "id": "roi-004",
+      "event": {
+        "title": "1:1 with VP Eng",
+        "agenda": "weekly check-in",
+        "attendees_count": 2,
+        "user_role": "founder",
+        "is_recurring": true,
+        "past_outcomes": "consistently produces decisions and action items"
+      },
+      "expected_score": "high"
+    }
+  ],
+  "metric": "exact_match",
+  "target_score": 0.75
+}

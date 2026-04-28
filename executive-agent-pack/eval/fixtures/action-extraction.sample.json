@@ -1,0 +1,30 @@
+{
+  "name": "action-item-extraction",
+  "description": "Extract action items from meeting transcripts. Each item has assignee + (optional) deadline.",
+  "version": 1,
+  "examples": [
+    {
+      "id": "ai-001",
+      "transcript_excerpt": "Sarah: I'll send the updated deck by EOW. Manuel: Great. Mike, can you book the offsite venue by Friday? Mike: Yep, on it.",
+      "expected_actions": [
+        { "owner": "Sarah", "task": "send updated deck", "deadline_relative": "EOW" },
+        { "owner": "Mike", "task": "book offsite venue", "deadline_relative": "Friday" }
+      ]
+    },
+    {
+      "id": "ai-002",
+      "transcript_excerpt": "We talked about the roadmap and everyone shared their thoughts. It was a good discussion.",
+      "expected_actions": []
+    },
+    {
+      "id": "ai-003",
+      "transcript_excerpt": "Manuel: I'll review the contract tonight and respond tomorrow. Lisa: I'll loop in legal in the morning.",
+      "expected_actions": [
+        { "owner": "Manuel", "task": "review contract", "deadline_relative": "tonight, respond tomorrow" },
+        { "owner": "Lisa", "task": "loop in legal", "deadline_relative": "morning" }
+      ]
+    }
+  ],
+  "metric": "f1_on_owner_task_pairs",
+  "target_score": 0.80
+}
