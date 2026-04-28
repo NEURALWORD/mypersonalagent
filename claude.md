@@ -104,17 +104,38 @@ You operate in this loop. Do not break it.
 4. Plan: write 5-15 line plan in your head, sanity check
 5. TDD: write failing test FIRST (unit + integration where applicable)
 6. Implement: minimum code to pass test
-7. Run gate:
-   - pnpm typecheck     (must pass)
-   - pnpm lint          (must pass)
-   - pnpm test          (must pass)
-   - pnpm eval:relevant (must not regress)
+7. Run gate (phase-aware — see "Phase-aware quality gate" below)
 8. If gate red → debug autonomously, max 5 iterations
 9. If still red after 5 iterations → write to BLOCKERS.md with diagnosis, move on
 10. If green → commit (conventional commits), update BACKLOG.md (mark done)
 11. Update DECISIONS.md if you made architectural choice
 12. Goto 1
 ```
+
+### Phase-aware quality gate
+
+`pnpm gate` enforces a different bar depending on which phase has shipped.
+Reason: the eval harness itself ships in Phase 2 (task AI-004), so we cannot
+require evals before they exist.
+
+| Phase                          | `pnpm gate` =                                                       |
+|--------------------------------|---------------------------------------------------------------------|
+| Phase 0 (Foundations)          | typecheck + lint + test                                             |
+| Phase 1 (Memory)               | typecheck + lint + test + eval:unit                                 |
+| Phase 2+ (after AI-004 lands)  | typecheck + lint + test + eval:unit + eval:integration              |
+
+When AI-004 is merged, update `turbo.json`'s `gate` task and this table in the
+same commit.
+
+### Phase-0 branch exception
+
+Phase 0 (foundations, F-001..F-010) commits **directly** to the working branch.
+No per-task PRs during bootstrap — the repo has no users, no integrations, no
+secrets in flight.
+
+From Phase 1 (M-001) onward, the standard discipline kicks in: every task gets
+its own `feat/<task-id>-<slug>` branch and a PR (squash-merge), per the
+"NEVER push to main directly" rule below.
 
 ### Bugfix sub-loop (when test/eval is red)
 
@@ -155,7 +176,7 @@ You operate in this loop. Do not break it.
 - ❌ Log raw email content, message bodies, or any user PII to console/Sentry
 - ❌ Train models on user data unless user has opted in via explicit setting
 - ❌ Create a new agent without registering it with master orchestrator
-- ❌ Push to main directly. All work goes via PR (even solo, for audit trail)
+- ❌ Push to main directly. All work goes via PR (even solo, for audit trail). Phase 0 only: direct commits to the working setup branch are allowed (see "Phase-0 branch exception").
 - ❌ Skip eval gate "just this once"
 - ❌ Use deprecated patterns: getServerSideProps, pages router, raw cookies API
 

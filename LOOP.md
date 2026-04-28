@@ -134,7 +134,9 @@ Then continue the loop.
 These rules are repeated here for emphasis. They must hold across all session types.
 
 1. **Never push to main directly.** All work via PR (even solo). Branch: `feat/<task-id>-<slug>`.
+   - **Phase 0 exception**: foundations tasks (F-001..F-010) commit directly to the working setup branch — no per-task PR. From Phase 1 (M-001) onward, the per-task `feat/` branch + PR is mandatory.
 2. **Never bypass the eval gate.** If you cannot make a regression eval pass, stop and write to BLOCKERS.md.
+   - **Phase-aware gate**: until AI-004 lands, `pnpm gate` = typecheck + lint + test only. Phase 1 adds `eval:unit`. Phase 2+ adds `eval:integration`. See `claude.md` → "Phase-aware quality gate" for the table.
 3. **Never use `any` or `as any` or `// @ts-ignore`** without a comment justifying and a follow-up TODO.
 4. **Never hardcode secrets, model names, URLs.** Always env or config.
 5. **Never log raw user PII** to console, Sentry, PostHog. Langfuse only (under DPA).
