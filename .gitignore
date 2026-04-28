@@ -37,6 +37,9 @@ Thumbs.db
 coverage
 .nyc_output
 
+# typescript build cache
+*.tsbuildinfo
+
 # docker volumes (when bind-mounted)
 postgres_data
 redis_data
