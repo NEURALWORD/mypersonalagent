@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { AuthProvider } from '@/components/auth-provider';
 import { ThemeProvider } from '@/components/theme-provider';
+import { TrpcProvider } from '@/lib/trpc';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -13,7 +14,9 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
 	<html lang="en" suppressHydrationWarning>
 		<body>
 			<AuthProvider>
-				<ThemeProvider>{children}</ThemeProvider>
+				<ThemeProvider>
+					<TrpcProvider>{children}</TrpcProvider>
+				</ThemeProvider>
 			</AuthProvider>
 		</body>
 	</html>
