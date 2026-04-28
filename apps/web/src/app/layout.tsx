@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { AuthProvider } from '@/components/auth-provider';
 import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
@@ -11,7 +12,9 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => (
 	<html lang="en" suppressHydrationWarning>
 		<body>
-			<ThemeProvider>{children}</ThemeProvider>
+			<AuthProvider>
+				<ThemeProvider>{children}</ThemeProvider>
+			</AuthProvider>
 		</body>
 	</html>
 );
