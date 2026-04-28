@@ -69,4 +69,27 @@ describe('parseEnv', () => {
 		const broken = { ...minimalValid, NODE_ENV: 'qa' };
 		expect(() => parseEnv(broken)).toThrow(EnvValidationError);
 	});
+
+	it('production refuses to start without real keys (ADR-020)', () => {
+		try {
+			parseEnv({ ...minimalValid, NODE_ENV: 'production' });
+			expect.fail('parseEnv should have thrown for production without real keys');
+		} catch (e) {
+			expect(e).toBeInstanceOf(EnvValidationError);
+			const message = (e as EnvValidationError).message;
+			expect(message).toContain('SENTRY_DSN');
+			expect(message).toContain('NEXT_PUBLIC_POSTHOG_KEY');
+			expect(message).toContain('mock fallback disabled');
+		}
+	});
+
+	it('production parses cleanly when all real keys are supplied', () => {
+		const env = parseEnv({
+			...minimalValid,
+			NODE_ENV: 'production',
+			SENTRY_DSN: 'https://abc@sentry.io/123',
+			NEXT_PUBLIC_POSTHOG_KEY: 'phc_test',
+		});
+		expect(env.NODE_ENV).toBe('production');
+	});
 });

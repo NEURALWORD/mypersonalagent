@@ -227,3 +227,22 @@ The implementation is `pnpm typecheck && pnpm lint && pnpm test` at root for now
 **Alternatives considered**: install pnpm 9 globally (fights Corepack); drop the version pin (drift across machines).
 **Consequences**: workspace lockfile uses pnpm 10 format. Marginal compat risk for any tool that hard-codes pnpm 9 — none known today. Future devs get the pinned version automatically via Corepack.
 **Status**: accepted
+
+## ADR-020 — External services use env-driven real-or-mock pattern — 2026-04-28
+
+**Context**: Phase-0 wires Clerk auth, Inngest jobs, Langfuse, Sentry, PostHog. Each requires a real account + secret to function. Provisioning all of them before code lands blocks development; landing code that crashes without keys blocks every local dev session and the autonomous loop.
+**Decision**: Every external-service client lives behind a single `providerFactory` utility in `packages/shared`. The factory inspects an env-derived "key" and returns one of:
+1. **Real client** when the secret is present and well-formed → SDK is constructed normally.
+2. **Mock client** when the secret is absent/empty → returns a deterministic, side-effect-light stub (logs to stdout in dev, no-ops in `test`/`production`-without-key).
+
+Production refuses to start without real keys: the env validator (`parseEnv`) treats the relevant secrets as required when `NODE_ENV === 'production'` and optional otherwise. This guards against accidental "we shipped with mocks" deploys.
+
+For Clerk specifically: a `MockAuthProvider` returns a stub user `{ id: 'usr_dev', email: 'dev@local.test' }` so downstream tRPC procedures and React server components can be exercised without a real auth flow. Real Clerk is wired at staging deploy time.
+
+**Alternatives considered**: hard-fail on missing keys (blocks every offline dev session); silent no-op clients (hides "I forgot to set this in prod" until users notice); per-service ad-hoc handling (drift across services).
+**Consequences**:
+- ✓ One pattern, one place: `providerFactory` is the single point that decides real vs mock.
+- ✓ Tests are deterministic — they always get the mock unless they explicitly opt into a real client.
+- ✓ Production still fails fast on misconfiguration (via env validator, not a runtime null deref).
+- ✗ Mock clients must be kept in rough behavioural sync with the real SDKs — drift is a maintenance tax. Mitigated by keeping mocks minimal and hand-rolled, not auto-generated.
+**Status**: accepted

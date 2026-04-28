@@ -89,6 +89,20 @@ const formatIssues = (issues: z.ZodIssue[]): string => {
 };
 
 /**
+ * Keys that are optional in dev/test (so the dev-mode mock providers from
+ * ADR-020 can run) but mandatory in production. The env validator enforces
+ * this so a prod boot can never silently fall back to mocks.
+ */
+const PRODUCTION_REQUIRED_KEYS = [
+	'INNGEST_EVENT_KEY',
+	'INNGEST_SIGNING_KEY',
+	'LANGFUSE_PUBLIC_KEY',
+	'LANGFUSE_SECRET_KEY',
+	'SENTRY_DSN',
+	'NEXT_PUBLIC_POSTHOG_KEY',
+] as const;
+
+/**
  * Parse and validate environment variables. Throws `EnvValidationError` with
  * a multi-line summary if anything is missing or malformed. Caller chooses
  * when to invoke (typically once at app boot) so importing this module never
@@ -97,5 +111,20 @@ const formatIssues = (issues: z.ZodIssue[]): string => {
 export const parseEnv = (source: NodeJS.ProcessEnv = process.env): Env => {
 	const result = envSchema.safeParse(source);
 	if (!result.success) throw new EnvValidationError(result.error.issues);
-	return result.data;
+	const data = result.data;
+	if (data.NODE_ENV === 'production') {
+		const missing: z.ZodIssue[] = [];
+		for (const key of PRODUCTION_REQUIRED_KEYS) {
+			const value = data[key];
+			if (typeof value !== 'string' || value.trim().length === 0) {
+				missing.push({
+					code: 'custom',
+					path: [key],
+					message: 'required when NODE_ENV=production (mock fallback disabled)',
+				});
+			}
+		}
+		if (missing.length > 0) throw new EnvValidationError(missing);
+	}
+	return data;
 };
