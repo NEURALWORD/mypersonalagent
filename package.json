@@ -19,7 +19,11 @@
 		"eval:unit": "turbo run eval:unit",
 		"eval:integration": "turbo run eval:integration",
 		"eval:regression": "turbo run eval:regression",
-		"gate": "pnpm typecheck && pnpm lint && pnpm test"
+		"gate": "pnpm typecheck && pnpm lint && pnpm test",
+		"db:generate": "pnpm --filter @exec/db db:generate",
+		"db:migrate": "pnpm --filter @exec/db db:migrate",
+		"db:studio": "pnpm --filter @exec/db db:studio",
+		"db:push": "pnpm --filter @exec/db db:push"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.0",

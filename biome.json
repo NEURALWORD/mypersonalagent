@@ -20,7 +20,8 @@
 			"!**/build",
 			"!**/coverage",
 			"!**/*.min.js",
-			"!**/eval/runs"
+			"!**/eval/runs",
+			"!**/migrations/**"
 		]
 	},
 	"formatter": {

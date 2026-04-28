@@ -1,0 +1,39 @@
+{
+	"name": "@exec/db",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"description": "Database layer: Drizzle schema, migrations, typed client.",
+	"main": "./src/index.ts",
+	"types": "./src/index.ts",
+	"exports": {
+		".": {
+			"types": "./src/index.ts",
+			"default": "./src/index.ts"
+		},
+		"./schema": {
+			"types": "./src/schema/index.ts",
+			"default": "./src/schema/index.ts"
+		}
+	},
+	"scripts": {
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "tsx src/migrate.ts",
+		"db:studio": "drizzle-kit studio",
+		"db:push": "drizzle-kit push"
+	},
+	"dependencies": {
+		"@exec/shared": "workspace:*",
+		"drizzle-orm": "^0.36.4",
+		"postgres": "^3.4.5"
+	},
+	"devDependencies": {
+		"@types/node": "*",
+		"drizzle-kit": "^0.30.0",
+		"tsx": "^4.19.0",
+		"typescript": "*",
+		"vitest": "*"
+	}
+}
